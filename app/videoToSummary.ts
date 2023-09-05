@@ -28,8 +28,12 @@ export async function videoToSummary(urlstring: string) {
         filter: 'audioonly',
         quality: 'highestaudio',
     });
-
-    await convertVideoToAudio(videoReadableStream, outputFile)
+    try {
+        await convertVideoToAudio(videoReadableStream, outputFile)
+    } catch (error) {
+        console.log("converting video to audio has failed")
+        return;
+    }
 
     try {
         const transcript = await transcribeAudio(outputFile);
@@ -98,7 +102,6 @@ async function SummarizeTranscript(transcript: any) {
                               include what the author said that is important and add details if the author is lacking. 
                               i would like you to be concise in your answer with no boilerplate just straight to the point.
                               dont go over 20 lines when explaining. 
-                              use bullet points when it comes to instructions or list of things.
                               here is the prompt: ${transcript}`
                 }],
         });
