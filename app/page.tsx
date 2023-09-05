@@ -11,7 +11,6 @@ async function page() {
         urlstring && await videoToSummary(urlstring)
         revalidatePath('/')
     }
-
     return (
         <main className="flex flex-col items-center h-screen">
             <header className=" p-4 text-white shadow-lg mt-10 mb-5">
@@ -32,7 +31,7 @@ async function page() {
             <p className={`mb-3 text-gray-500 dark:text-gray-400 text-center mt-4 w-2/3 ${displaySummary() && "border rounded-lg border-white p-4"}`}>
                 {displaySummary() && displaySummary()}
             </p>
-            
+
         </main>
     )
 }
